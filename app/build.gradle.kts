@@ -94,4 +94,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
     implementation(libs.androidx.navigation.dynamic.features.fragment)
+
+    // Leak Canary
+    debugImplementation(libs.leakcanary.android)
+
 }
