@@ -17,8 +17,8 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the app under test.
+        // Context of the app under test (the host app that includes this library).
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.setiawan.capstone.favorite", appContext.packageName)
+        assertEquals("com.setiawan.capstone", appContext.packageName)
     }
 }
