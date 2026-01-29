@@ -31,11 +31,8 @@ android {
         }
 
         debug {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            // Keep debug builds unminified to avoid stripping test/runtime classes
+            isMinifyEnabled = false
         }
     }
     compileOptions {

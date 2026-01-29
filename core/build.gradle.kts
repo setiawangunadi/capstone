@@ -27,11 +27,8 @@ android {
         }
 
         debug {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            // Disable minification for debug to keep test/runtime classes intact
+            isMinifyEnabled = false
         }
     }
 
@@ -101,6 +98,7 @@ dependencies {
 
     // Testing
     testImplementation(libs.junit)
+    androidTestImplementation(kotlin("stdlib"))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
