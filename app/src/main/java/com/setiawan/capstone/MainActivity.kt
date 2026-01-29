@@ -93,10 +93,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ) {
                 when (intent.action) {
                     Intent.ACTION_POWER_CONNECTED -> {
-                        Toast.makeText(context, "", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, R.string.power_connected, Toast.LENGTH_LONG).show()
                     }
                     Intent.ACTION_POWER_DISCONNECTED -> {
-                        Toast.makeText(context, "", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, R.string.power_disconnected, Toast.LENGTH_LONG).show()
                     }
                 }
             }

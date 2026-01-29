@@ -31,9 +31,11 @@ android {
         }
 
         debug {
-            // Keep debug builds unminified so instrumentation (androidTest) has
-            // access to Kotlin stdlib + runner transitive classes at runtime.
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
