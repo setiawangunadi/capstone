@@ -52,6 +52,9 @@ android {
 
 dependencies {
     // Core
+    // Ensure Kotlin stdlib is packaged when this module is used in an app/test APK
+    implementation(kotlin("stdlib"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

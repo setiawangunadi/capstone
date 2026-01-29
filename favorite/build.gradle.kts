@@ -42,6 +42,9 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":app"))
 
+    // Ensure Kotlin stdlib is packaged (dynamic feature runtime)
+    implementation(kotlin("stdlib"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.recyclerview)

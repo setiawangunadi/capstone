@@ -55,6 +55,9 @@ android {
 dependencies {
     implementation(project(":core"))
 
+    // Ensure Kotlin stdlib is packaged (required by androidx.test runtime as well)
+    implementation(kotlin("stdlib"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -69,6 +72,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.activity)
     testImplementation(libs.junit)
+    androidTestImplementation(kotlin("stdlib"))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
