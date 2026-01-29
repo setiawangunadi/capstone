@@ -34,7 +34,8 @@
 ##---------------Begin: proguard configuration for Retrofit ----------
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
 # EnclosingMethod is required to use InnerClasses.
--keepattributes Signature, InnerClasses, EnclosingMethod
+# KotlinMetadata is needed for sealed classes and other Kotlin-specific features
+-keepattributes Signature, InnerClasses, EnclosingMethod, KotlinMetadata
 
 # Retrofit does reflection on method and parameter annotations.
 -keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
@@ -85,3 +86,45 @@ public *;
 ##---------------Begin: proguard configuration for RxJava ----------
 # Uncomment if you use RxJava
 #-dontwarn java.util.concurrent.Flow*
+
+##---------------Begin: proguard configuration for Core Module Classes ----------
+# Keep Resource sealed class and all its subtypes (used in when expressions)
+-keep class com.setiawan.capstone.core.data.Resource { *; }
+-keep class com.setiawan.capstone.core.data.Resource$Success { *; }
+-keep class com.setiawan.capstone.core.data.Resource$Loading { *; }
+-keep class com.setiawan.capstone.core.data.Resource$Error { *; }
+-keep class com.setiawan.capstone.core.data.Resource$* { *; }
+# Keep all classes that extend Resource (for sealed class subtypes)
+-keep class * extends com.setiawan.capstone.core.data.Resource { *; }
+
+# Keep Movie data class (Parcelable with @Parcelize)
+-keep class com.setiawan.capstone.core.domain.model.Movie { *; }
+-keepclassmembers class com.setiawan.capstone.core.domain.model.Movie {
+    <init>(...);
+    <fields>;
+}
+
+# Keep repository interface and implementation
+-keep interface com.setiawan.capstone.core.domain.repository.IMovieRepository { *; }
+-keep class com.setiawan.capstone.core.data.MovieRepository { *; }
+
+# Keep use case interface and implementation
+-keep interface com.setiawan.capstone.core.domain.usecase.MovieUseCase { *; }
+-keep class com.setiawan.capstone.core.domain.usecase.MovieInteractor { *; }
+-keepclassmembers class com.setiawan.capstone.core.domain.usecase.MovieInteractor {
+    <init>(...);
+}
+
+# Keep MovieAdapter and its inner classes
+-keep class com.setiawan.capstone.core.presentation.MovieAdapter { *; }
+-keep class com.setiawan.capstone.core.presentation.MovieAdapter$ListViewHolder { *; }
+-keep class com.setiawan.capstone.core.presentation.MovieAdapter$* { *; }
+
+# Keep Koin module top-level properties (CoreModuleKt)
+# Kotlin top-level properties are compiled to static fields in a class named <ModuleName>Kt
+-keep class com.setiawan.capstone.core.di.CoreModuleKt { *; }
+-keepclassmembers class com.setiawan.capstone.core.di.CoreModuleKt {
+    static ** databaseModule;
+    static ** networkModule;
+    static ** repositoryModule;
+}
